@@ -1,0 +1,70 @@
+<script>
+
+// Task 1
+function isPalindrome(argument) {
+    const checkArgument = typeof argument === 'string' ? argument.toLocaleLowerCase() : argument + ''
+    let reversedArgument = ''
+
+    for(let i = checkArgument.length - 1; i >= 0; i--) {
+        reversedArgument += checkArgument[i]
+    }
+
+    return checkArgument === reversedArgument
+}
+
+// Task 2
+function findIndeticalPrefixes(arr) {
+
+    let result = null;
+
+    let shorterWord = arr.sort((a,b) => a.length - b.length)[0];
+
+    for(let j = 0; j < shorterWord.length; j++) {
+        let isEqual = arr.every(x => x[j] === shorterWord[j]);
+        if(isEqual){
+            result += shorterWord[j];
+        }
+        else { break };
+    }
+
+    if(!result) { return false };
+
+
+    return result
+
+}
+
+// Task 3
+const arr =  [
+{ type: 'A', value:'Tesla' },	
+{ type:'A', value:'GMC' },
+{ type:'B', value:'KIA'},
+{ type:'C', value:'Dodge' },
+{ type:'C', value: 'Ford' }
+]
+
+
+function joinSameTypeValues(arr) {
+    const filteredObjectsList = [];
+    for (let key of arr) {
+
+        let model = {  type: null,value: [] };
+
+        let existedObject = filteredObjectsList.find(x => x.type === key.type);
+
+        if(!existedObject){
+            for(let item of arr) {
+                if(key.type === item.type) {
+                    model.type = key.type;
+                    model.value.push(item.value);
+                }
+            }
+        }
+        
+        if(model.type){
+            filteredObjectsList.push(model);
+        }
+    }
+}
+
+</script>
